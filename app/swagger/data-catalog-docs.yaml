@@ -1,0 +1,33 @@
+# 
+swagger: "2.0"
+
+info:
+  title: "Data catalog microservice API"
+  version: "1.0"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+
+basePath: "/api/v1.0"
+
+# defines the section of the configuration containing all of the API REST endpoints
+paths:
+  #  defines one path of your URL endpoint.
+  /datasets:
+    # defines the HTTP method this URL endpoint will respond to. Together with the previous definitions, this creates the GET /api/v1.0/datasets URL endpoint.
+    get:
+      operationId: "api.datasets.datasets.get"
+      tags:
+        - "Datasets"
+      responses:
+        '200':
+          description: 'Fetch a list of items'
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+              name: { type: string }
