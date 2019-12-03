@@ -1,5 +1,6 @@
 # data-catalog
-Microservice data-catalog
 
-## To install the dependancies into your virtual environment:
-`pip3 install -r requirements.txt`
+## Development
+- `docker-compose up -d --build`
+- `docker-compose exec data-catalog python manage.py recreate_db`
+- `docker-compose exec data-catalog python manage.py seed_db`

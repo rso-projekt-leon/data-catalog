@@ -1,5 +1,0 @@
-Flask
-connexion
-Flask-Injector
-fastavro
-connexion[swagger-ui]

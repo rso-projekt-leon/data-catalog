@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  data-catalog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ['/usr/src/app/entrypoint.sh']
+    volumes:
+      - '.:/usr/src/app'
+    ports:
+      - 8083:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=app.config.DevelopmentConfig
+      - DATABASE_URL=postgresql://postgres:postgres@catalog-db:5432/catalog_dev
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@catalog-db:5432/catalog_test
+    depends_on:
+      - catalog-db
+  catalog-db:
+    build:
+      context: ./app/db
+      dockerfile: Dockerfile
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
