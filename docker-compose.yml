@@ -17,6 +17,8 @@ services:
       - DATABASE_TEST_URL=postgresql://postgres:postgres@catalog-db:5432/catalog_test
     depends_on:
       - catalog-db
+    networks:
+      - backend 
   catalog-db:
     build:
       context: ./app/db
@@ -26,4 +28,9 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
+    networks:
+      - backend
+networks:
+  backend:
+    external: true
+  

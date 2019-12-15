@@ -9,16 +9,18 @@ class Dataset(db.Model):
     __tablename__ = "datasets"
 
     dataset_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    dataset_name = db.Column(db.String(128), nullable=False)
+    dataset_name = db.Column(db.String(128), nullable=False, unique=True)
     file_name = db.Column(db.String(128), nullable=False)
     dataset_lenght = db.Column(db.Integer, nullable=True)
     dataset_size = db.Column(db.Float, nullable=True)
     processed = db.Column(db.Boolean, default=False, nullable=False)
     created_timestamp = db.Column(db.DateTime, default=func.now(), nullable=False)
 
-    def __init__(self, dataset_name="", file_name=""):
+    def __init__(self, dataset_name="", file_name="", dataset_lenght="", dataset_size=""):
         self.dataset_name = dataset_name
         self.file_name = file_name
+        self.dataset_lenght = dataset_lenght
+        self.dataset_size = dataset_size
 
     def to_json(self):
         return {

@@ -22,5 +22,7 @@ RUN pip install -r requirements.txt
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 RUN chmod +x /usr/src/app/entrypoint.sh
 
+EXPOSE 5000
+
 # add app
 COPY . /usr/src/app
