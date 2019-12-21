@@ -8,5 +8,5 @@ done
 echo "PostgreSQL started"
 
 
-echo "Starting iot-platforma..."
+echo "Starting data-catalog..."
 python manage.py run -h 0.0.0.0
