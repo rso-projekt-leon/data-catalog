@@ -85,10 +85,21 @@ class Datasets(Resource):
             db.session.rollback()
             return response_object, 400
 
-
-
-
-
+    def delete(self, dataset_name):
+        response_object = {"status": "fail", "message": "Dataset does not exist"}
+        try:
+            dataset = Dataset.query.filter_by(dataset_name=dataset_name).first()
+            if not dataset:
+                return response_object, 404
+            else:
+                # TODO dodaj izbris iz S3
+                db.session.delete(dataset)
+                db.session.commit()
+                response_object["status"] = "success"
+                response_object["message"] = f"{dataset.dataset_name} was removed!"
+                return response_object, 200
+        except ValueError:
+            return response_object, 404
 
 
 
