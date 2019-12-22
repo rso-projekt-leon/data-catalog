@@ -15,7 +15,7 @@ spec:
         app: data-catalog
     spec:
       containers: 
-      - image: leon11sj/data-catalog-microservice:version-1.0.0-1.1
+      - image: leon11sj/data-catalog-microservice:version-1.0.0-3.1
         name: data-catalog
         command: ["gunicorn"]
         args: ["--bind", "0.0.0.0:5000", "manage:app"]
@@ -27,7 +27,7 @@ spec:
           - name: FLASK_APP
             value: app/__init__.py
           - name: SQL_HOST
-            value: "35.241.134.196"
+            value: "10.86.32.3"
           - name: SQL_PORT  
             value: "5432"
           - name: DATABASE

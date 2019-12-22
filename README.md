@@ -6,3 +6,6 @@
 - `docker-compose up -d --build`
 - `docker-compose exec data-catalog python manage.py recreate_db`
 - `docker-compose exec data-catalog python manage.py seed_db`
+
+## Production 
+- `kubectl apply -f kubernetes/data-catalog-deployment.yaml`
