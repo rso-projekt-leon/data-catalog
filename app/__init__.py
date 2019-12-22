@@ -30,6 +30,9 @@ def create_app(script_info=None):
     from app.api.datasets.views import datasets_blueprint
     app.register_blueprint(datasets_blueprint)
 
+    from app.api.etcdtest.views import etcdtest_blueprint
+    app.register_blueprint(etcdtest_blueprint)
+
     # shell context for flask cli
     @app.shell_context_processor
     def ctx():

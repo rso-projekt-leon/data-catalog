@@ -15,7 +15,7 @@ spec:
         app: data-catalog
     spec:
       containers: 
-      - image: leon11sj/data-catalog-microservice:version-1.0.0-3.1
+      - image: leon11sj/data-catalog-microservice:version-1.0.0-4.1
         name: data-catalog
         command: ["gunicorn"]
         args: ["--bind", "0.0.0.0:5000", "manage:app"]
@@ -33,7 +33,13 @@ spec:
           - name: DATABASE
             value: postgres
           - name: POSTGRES_DB
-            value: catalog_prod  
+            value: catalog_prod
+          - name: CONFIG_ETCD_HOST_IP
+            value: etcd
+          - name: CONFIG_ETCD_HOST_PORT
+            value: "2379"
+          - name: MESSAGE
+            value: "no_etcd_working"
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:

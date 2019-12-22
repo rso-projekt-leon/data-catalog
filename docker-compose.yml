@@ -15,8 +15,10 @@ services:
       - APP_SETTINGS=app.config.DevelopmentConfig
       - DATABASE_URL=postgresql://postgres:postgres@catalog-db:5432/catalog_dev
       - DATABASE_TEST_URL=postgresql://postgres:postgres@catalog-db:5432/catalog_test
+      - MESSAGE=no_etcd_working
     depends_on:
       - catalog-db
+      - etcd
     networks:
       - backend 
   catalog-db:
@@ -30,6 +32,21 @@ services:
       - POSTGRES_PASSWORD=postgres
     networks:
       - backend
+  etcd:
+   image: quay.io/coreos/etcd:latest
+   ports:
+     - "2379:2379"
+   networks:
+      - backend   
+   command: >-
+     /usr/local/bin/etcd
+     -name node1
+     -advertise-client-urls http://etcd:2379
+     -listen-client-urls http://0.0.0.0:2379
+     -initial-advertise-peer-urls http://etcd:2380
+     -listen-peer-urls http://0.0.0.0:2380
+     -initial-cluster node1=http://etcd:2380
+     -cors="*"
 networks:
   backend:
     external: true
