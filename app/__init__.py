@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import import_string
 
 # instantiate the extensions
 db = SQLAlchemy()
@@ -15,7 +16,8 @@ def create_app(script_info=None):
 
     # set config
     app_settings = os.getenv("APP_SETTINGS")
-    app.config.from_object(app_settings)
+    cfg = import_string(app_settings)()
+    app.config.from_object(cfg)
 
     # set up extensions
     db.init_app(app)

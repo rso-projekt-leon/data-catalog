@@ -9,3 +9,6 @@
 
 ## Production 
 - `kubectl apply -f kubernetes/data-catalog-deployment.yaml`
+
+Enter in conteiner in Kubernetes:
+- `kubectl exec -it <POD_NAME>  -- /bin/sh`
