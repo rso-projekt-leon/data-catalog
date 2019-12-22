@@ -40,12 +40,12 @@ class DevelopmentConfig(BaseConfig):
     def SQLALCHEMY_DATABASE_URI(self):         
         try:
             if self.CONFIG_ETCD_HOST_IP==None or self.CONFIG_ETCD_HOST_PORT== None:
-                return os.environ.get("SQLALCHEMY_DATABASE_URI")
+                return os.environ.get("DATABASE_URL")
             else:
                 client = etcd.Client(host=self.CONFIG_ETCD_HOST_IP, port=int(self.CONFIG_ETCD_HOST_PORT))
                 return client.read('/data-catalog/database-url').value
         except:
-            return os.environ.get("SQLALCHEMY_DATABASE_URI")
+            return os.environ.get("DATABASE_URL")
 
 
 class TestingConfig(BaseConfig):
@@ -74,9 +74,9 @@ class ProductionConfig(BaseConfig):
     def SQLALCHEMY_DATABASE_URI(self):         
         try:
             if self.CONFIG_ETCD_HOST_IP==None or self.CONFIG_ETCD_HOST_PORT== None:
-                return os.environ.get("SQLALCHEMY_DATABASE_URI")
+                return os.environ.get("DATABASE_URL")
             else:
                 client = etcd.Client(host=self.CONFIG_ETCD_HOST_IP, port=int(self.CONFIG_ETCD_HOST_PORT))
                 return client.read('/data-catalog/database-url').value
         except:
-            return os.environ.get("SQLALCHEMY_DATABASE_URI")
+            return os.environ.get("DATABASE_URL")

@@ -15,7 +15,7 @@ spec:
         app: data-catalog
     spec:
       containers: 
-      - image: leon11sj/data-catalog-microservice:version-1.0.0-4.1
+      - image: leon11sj/data-catalog-microservice:version-1.0.0-5.1
         name: data-catalog
         command: ["gunicorn"]
         args: ["--bind", "0.0.0.0:5000", "manage:app"]
