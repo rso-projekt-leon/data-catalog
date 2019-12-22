@@ -1,0 +1,14 @@
+sudo: required
+language: python
+services:
+- docker
+env:
+  global:
+  - DOCKER_IMAGE=leon11sj/data-catalog-microservice:version-1.0.0-$TRAVIS_JOB_NUMBER
+  - secure: iFnlP5q+M9xxfwThqtSpfe2T38+v0NSrJXEEKEHtNCO4h8fidHo/VZGCMlQ4JYE9PwEqYkG87wYUTqQEdSf1xAXIbEpGowYbeIqIimAPOo4HM4wZ3oeHjralTDxFQRqLLxuJMHfSqJEJfgkZw7gkiHP9MRmtB1tPE6PSDp1VcqZot3+fw1/qS6cbXLMziIW1fZ1bfO/FGMppriJeoKITIigiP4E+OpgSMK/JJRsoPvWHtYoVbWSLdFpeGi18ZeqLCDwIfTc+skbakJyM84F71nXql8fTXmQ/9hyb30KHa1TGmdbUJdMAzxRGJW+/3YNMquWAHibiuXKxJrH7NElHmkjKClFgcD5e+2YzMu6/hHXo4aQe59QJnEN9hofEX/U7/RYmVAMobUcc1By3JgohB9Bpjs7KcoFGx0iwHrvtN+tNJTxZVbmc2XECiw8OiPnGg2M17Fxs43wJ3O2XbP8oD/6IlJKbQjiH/zwV5DUwuCNgr1HOER2cDQJ4/6/Zy7B/l6GFrpIrnkwUofNw+Kwt6/cgtehps1+ZyLdUXAnUnqz5xTxtjqM4Xm0f0yPPhNr88NcDT+wq2HRvt/yBOc8AOzcveQCdsEgCTqclTo4sm+vgiZUx6rS7xHjnxM0/Al5TPa2CM+gJyF840hdy2f6tSb5dA+M5sgkfYkidGdcaV7E=
+  - secure: sIN1R/ABigN7UJwuGz41WczXXS6kpWqfKonI/h876rxLc/kt7NMnEpyOh+AigEl2OWLaHZIIsqfwXJwIeGzQuo/fs5WyW/5iFH4FHnm7pX5o1oJH0lmhdw6d1ERBN1ahq7+bxRi7m0cCDTiVzhr7KHCy9RWnlYjzH9Tfv5OGlug7nKTjC+fZDKQd4VFurop9Pu01Eta8jEvf/muWkU0l73LUNGxLgu66HbjOgcxxtJvwxqihPlzmgKX/uNGEFhVDS2j0Atiiz/UfpsV1p1WRy4ztcWgG6l6hILnqEPBvXrv6GdJiL/IqB8ratxFka4lDJ3E1SIeLY51vZzZI9aIRwgDoIVDmxlDlpUf+/Q+vcB8cc17S8+MuLSKeHgnaga5g9Jfb6tJ+wlrxQcS9+/w9M5GhyyZiw8c2wx+cbtrUYE/5AZj+o0fNLM+vfVFbxF/ZFFw3spTQ5z2M+wTRINGVaePDqoi+EPdSREdHobLChKWfNon1qbbSNUeLyBlj/3BIjo+A6WKELcwdeZFv/1r3o6tsG+5n/kwlyesPNg4/GB+4f8i7kPa0NJGjOg6bU9vCWPqv+3Z0bDBsCndThQV1/fPUpieyjii70YVsPYk/0MkHG1O6MpcTEDIL3ylWtirFi+1VdyPOzuE4eiSVJSjobfsfpQhmSWkHJHCfdKIjBw4=
+script:
+- docker build -f Dockerfile.prod -t "$DOCKER_IMAGE" .
+after_success:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker push "$DOCKER_IMAGE"
