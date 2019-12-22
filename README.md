@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rso-projekt-leon/data-catalog.svg?branch=master)](https://travis-ci.org/rso-projekt-leon/data-catalog)
+
 # data-catalog
 
 ## Development
